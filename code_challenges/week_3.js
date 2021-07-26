@@ -80,3 +80,44 @@ function getGrade(score) {
   else return 'A';
 }
 
+// loops
+
+// Activity 1 - Vacation Time!
+
+// Write a function called printVacations whose input is an array of arrays. Each sub-array should have two strings as elements: The 0th element should be a person's name and the 1st element should be that person's most desired vacation destination. Include a minimum of 3 sub-arrays in your input array, like so:
+// [ ['Tammy', 'Tahiti'], ['Erin', 'Banff, Alberta, Canada'], ['Janet', 'London'] ]
+// Your function should print each person's name and desired destination in a complete sentence, like this:
+
+// Tammy really wants to go to Tahiti.
+// Erin really wants to go to Banff, Alberta, Canada.
+// Janet really wants to go to London.
+
+
+function printVacations(arr) {
+  return arr.map(subarr => {
+    return (`${subarr[0]} really wants to go to ${subarr[1]}.`);
+  }
+    )
+}
+// Activity 2 - Vacation Choices
+// Follow the prompt for Activity #1, but use this format for the input array instead:
+// [ ['Tammy', ['Tahiti', 'Bali', 'Hawaii']], ['Erin', ['Banff, Alberta, Canada', 'Iceland']], ['Janet', ['London', 'Hogwarts']] ]
+// The output should look similar to this:
+
+// Tammy is willing to go to Tahiti, Bali or Hawaii.
+// Erin is willing to go to Banff, Alberta, Canada or Iceland.
+// Janet is willing to go to London or Hogwarts.
+function printVacationsTwo(arr) {
+
+  return arr.map(subarr => {
+    if (subarr[1].length === 3)
+    return (`${subarr[0]} is willing to go to ${subarr[1][0]}, ${subarr[1][1]}, or ${subarr[1][2]}.`);
+    else if (subarr[1].length === 2) {
+      return (`${subarr[0]} is willing to go to ${subarr[1][0]} or ${subarr[1][1]}.`);
+    } else {
+      return (`${subarr[0]} is willing to go to ${subarr[1]}.`);
+    }
+  }
+  )
+}
+
