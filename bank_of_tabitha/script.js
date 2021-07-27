@@ -246,17 +246,14 @@ createButton.addEventListener('click', function(event) {
 
     messageP.appendChild(document.createTextNode(name.message));
     event.preventDefault();
-    // console.log(name)
+
 
   })
 
 // TRANSACTIONS
 
 const transactButton = document.querySelector('#transact_button');
-// let formAccount = document.querySelector('#formAccount')
-// let formTransact = document.querySelector('#formTransact')
-// let formOther = document.querySelector('#formOther')
-// let formAmount = document.querySelector('#formAmount')
+
 transactButton.addEventListener('click', function(event) {
     let formAccount = document.querySelector('#formAccount')
     let formTransact = document.querySelector('#formTransact')
