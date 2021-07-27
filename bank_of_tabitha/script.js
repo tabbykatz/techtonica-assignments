@@ -18,39 +18,46 @@
 // * A `describe` method returning the account description.
 // * A `transfer` method with two parameters: the name of the account that will receive the transfer, and the amount of money to transfer.
 
+
+
+
+
 class Account {
-    constructor(name) {
+    constructor(name, balance) {
         this.name = name;
         this.isOpen = true;
 
-        // in the future I think we should allow for someone to create an account with a starting balance, since this is more
-        // realistic
-        this.balance = 0;
+
+        this.balance = balance;
         this.creditLine = 0;
 
         // debt represents how much of the credit line the account is using/ owes
         this.debt = 0;
 
         // welcome message
-        console.log(`Welcome to the Bank of Tabitha, ${this.name}!\n`);
+        this.message =(`Welcome to the Bank of Tabitha, ${this.name}!\n`);
+        this.display = `Accountholder: ${this.name} Balance: ${this.balance} Credit Line: ${this.creditLine}`
 
+        bankOfTabitha.accounts[this.name] = this;
+        bankOfTabitha.openAccounts += 1;
         // we also want to be able to close accounts
         this.closeAccount = function () {
             if (!this.isOpen) {
-                console.log(`Your account is already closed.`);
+                this.message = `Your account is already closed.`;
                 return false;
             }
             if (this.debt) {
-                console.log(`Account closure failed. Please pay your credit card debt of ${this.debt} before closing your account.\n`);
+                this.message = `Account closure failed. Please pay your credit card debt of ${this.debt} before closing your account.\n`;
                 return false;
             }
-            console.log(`Sorry to see you go, ${this.name}.\n`);
+            this.message = `Sorry to see you go, ${this.name}.\n`;
 
             if (this.balance > 0) {
-                console.log(`First, let's withdraw your balance of ${this.balance}.\n`);
+                this.message = `First, let's withdraw your balance of ${this.balance}.\n`;
                 this.withdraw(this.balance);
             }
-            console.log(`Farewell from Bank of Tabitha.\n`);
+            this.message = `Farewell from Bank of Tabitha.\n`;
+            bankOfTabitha.openAccounts -= 1;
             this.isOpen = false;
         };
         // this.creditLine is the max allowed to use as credit. Then we can have a method for starting credit line,
@@ -60,45 +67,45 @@ class Account {
         // open a line of credit if you don't have one already
         this.openCredit = function (amount) {
             if (!this.isOpen) {
-                console.log(`This account is closed.\n`);
+                this.message = `This account is closed.\n`;
                 return false;
             }
             if (!this.creditLine) {
                 this.creditLine += amount;
-                console.log(`Congrats ${this.name}! You have a credit line of ${this.creditLine}.\n`);
+                this.message = `Congrats ${this.name}! You have a credit line of ${this.creditLine}.\n`;
                 return true;
             }
-            console.log(`Hello, ${this.name}. Your account already has a credit line of ${this.creditLine}.\n`);
+            this.message = `Hello, ${this.name}. Your account already has a credit line of ${this.creditLine}.\n`;
             return false;
         };
 
         // using a credit card
         this.useCredit = function (amount) {
             if (!this.isOpen) {
-                console.log(`This account is closed.\n`);
+                this.message = `This account is closed.\n`;
                 return false;
             }
             if (this.debt + amount <= this.creditLine) {
                 this.debt += amount;
-                console.log(`Purchase approved. You are using ${this.debt} of your ${this.creditLine} credit line.\n`);
+                this.message = `Purchase approved. You are using ${this.debt} of your ${this.creditLine} credit line.\n`;
                 return true;
             }
-            console.log(`Card declined.\n`);
+            this.message = `Card declined.\n`;
             return false;
         };
 
         // pay your credit card bill
         this.payCreditCardBill = function (amount) {
             if (!this.isOpen) {
-                console.log(`This account is closed.\n`);
+                this.message = `This account is closed.\n`;
                 return false;
             }
             if (amount <= this.debt) {
                 this.debt -= amount;
-                console.log(`Thanks for paying your bill, ${this.name}. Your new credit card balance is ${this.debt}.\n`);
+                this.message = `Thanks for paying your bill, ${this.name}. Your new credit card balance is ${this.debt}.\n`;
                 return true;
             }
-            console.log(`Payment failed. Your balance is only ${this.debt}. Please pay that amount or less.\n`);
+            this.message = `Payment failed. Your balance is only ${this.debt}. Please pay that amount or less.\n`;
             return false;
         };
 
@@ -106,12 +113,12 @@ class Account {
         // Otherwise, transfers are possible even when folks have insufficient funds
         this.deposit = function (amount) {
             if (!this.isOpen) {
-                console.log(`This account is closed.\n`);
+                this.message = `This account is closed.\n`;
                 return false;
             }
             if (this._isPositive(amount)) {
                 this.balance += amount;
-                console.log(`Deposit successful. ${this.name}, your new balance is ${this.balance}.\n`);
+                this.message = `Deposit successful. ${this.name}, your new balance is ${this.balance}.\n`;
                 return true;
             }
             return false;
@@ -120,12 +127,12 @@ class Account {
         // not explicitly part of the assignment, but important I believe
         this.withdraw = function (amount) {
             if (!this.isOpen) {
-                console.log(`This account is closed.\n`);
+                this.message = `This account is closed.\n`;
                 return false;
             }
             if (this._isAllowed(amount)) {
                 this.balance -= amount;
-                console.log(`Withdrawal successful. ${this.name}, your new balance is ${this.balance}.\n`);
+                this.message = `Withdrawal successful. ${this.name}, your new balance is ${this.balance}.\n`;
                 return true;
             }
             return false;
@@ -134,11 +141,11 @@ class Account {
         // we need to be sure both the withdrawal and deposit are successful to confirm the transfer
         this.transfer = function (amount, account) {
             if (!this.isOpen) {
-                console.log(`This account is closed.\n`);
+                this.message = `This account is closed.\n`;
                 return false;
             }
             if (this.withdraw(amount) && account.deposit(amount)) {
-                console.log(`Transfer successful. ${amount} has been transferred from ${this.name} to ${account.name}.\n`);
+                this.message = `Transfer successful. ${amount} has been transferred from ${this.name} to ${account.name}.\n`;
                 return true;
             }
             return false;
@@ -148,7 +155,7 @@ class Account {
         this._isPositive = function (amount) {
             const isPositive = amount > 0;
             if (!isPositive) {
-                console.log(`Amount must be positive! Are you trying to make a withdrawal? Use ${this.name}.withdraw().\n`);
+                this.message = `Amount must be positive! Are you trying to make a withdrawal? Use ${this.name}.withdraw().\n`;
                 return false;
             }
             return true;
@@ -161,111 +168,129 @@ class Account {
 
             const isAllowed = this.balance - amount >= 0;
             if (!isAllowed) {
-                console.log(`${this.name}, you have insufficent funds! Your current balance is ${this.balance}.\n`);
+                this.message = `${this.name}, you have insufficent funds! Your current balance is ${this.balance}.\n`;
                 return false;
             }
             return true;
         };
 
-        // Get some info about the account
+        // Get some info create the account
         this.describe = function () {
             if (!this.isOpen) {
-                console.log(`This account is closed.\n`);
+                this.message = `This account is closed.\n`;
                 return false;
             }
-            console.log(`${this.name}\'s account:\nBalance: ${this.balance}\nCreditline: ${this.creditLine}\nCredit Card Balance: ${this.debt}\n`);
+            this.message = `${this.name}\'s account:\nBalance: ${this.balance}\nCreditline: ${this.creditLine}\nCredit Card Balance: ${this.debt}\n`;
+
         };
     }
 };
 
+class Bank {
+    constructor(name) {
+        this.name = name;
+        this.accounts = {};
+        this.openAccounts = 0;
+    }
+}
 
-  // Below are the requested tests:
-  // - Create an account for Billy, Rosie, Jack and Jill
+const bankOfTabitha = new Bank("bankOfTabitha");
 
-  let accounts = [];
+//testing
 
-  const Billy = new Account('Billy');
-  const Rosie = new Account('Rosie');
-  const Jack = new Account('Jack');
-  const Jill = new Account('Jill');
-  accounts.push(Billy, Rosie, Jack, Jill);
-  accounts.forEach(account => account.describe());
+const Tabitha = new Account('Tabitha', 1000);
+const Tristan = new Account('Tristan', 1000);
+const Anatoly = new Account('Anatoly', 1000);
+const Georgiana = new Account('Georgiana', 1000);
+const Romneya = new Account('Romneya', 1000);
+const Arlo = new Account('Arlo', 1000);
+// console.log(bankOfTabitha.accounts)
+// console.log(bankOfTabitha.openAccounts)
 
-  // - Give each of the accounts a deposity on money
 
-  accounts.forEach(account => account.deposit(1000));
 
-  // - Print a string describing the current amount of money on each account
+//this is what the html should look like
+/* <div class="list_accounts">
+      <p id="display_account_msg"><i class="fas fa-comments-dollar"></i> placeholder</p>
+      <p id="display_account_name"><i class="fas fa-money-check-alt"></i> placeholder</p>
+      <p id=display_account_balance><i class="fas fa-balance-scale-right"></i> placeholder</p>
+    </div> */
+//DISPLAY ACCOUNTS
 
-  //this feature is built into my deposit method
+// bankOfTabitha.accounts.forEach(function(account) {
+//     display = document.querySelector('#display_ul');
+//     const li = document.createElement('li');
+//     li.className = 'account_name'
+//     li.appendChild(document.createTextNode(account.display));
+//     display.appendChild(li);
 
-  // - Transfer positive values between Billy and Jack and negative values between Rosie and Jack
-  //because I have both deposit and withdraw, I will use those
+// })
 
-  //Billy gives Jack 500
+    for (let value in bankOfTabitha.accounts) {
+        display = document.querySelector('#display_ul');
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(value));
+        display.appendChild(li);
 
-  Billy.transfer(500, Jack);
+    }
 
-  //Jack returns the money
+let createButton = document.querySelector('#create_button');
+createButton.addEventListener('click', function(event) {
+    let form = document.querySelector('#new_account_name')
+    let accountName = form.value;
+    //console.log(accountName)
+    const name = new Account(accountName);
+    //console.log(name)
+    let messageP = document.querySelector('#create_account_msg');
+    let msg = document.createElement('span')
 
-  Jack.transfer(500, Billy);
+    messageP.appendChild(document.createTextNode(name.message));
+    event.preventDefault();
 
-  // Rosie withdraws 200
 
-  Rosie.withdraw(200);
+  })
 
-  // Jack withdraws 400
+// TRANSACTIONS
 
-  Jack.withdraw(400);
+const transactButton = document.querySelector('#transact_button');
 
-  // new status
+transactButton.addEventListener('click', function(event) {
+    let formAccount = document.querySelector('#formAccount')
+    let formTransact = document.querySelector('#formTransact')
+    let formOther = document.querySelector('#formOther')
+    let formAmount = document.querySelector('#formAmount')
+    let accountName = formAccount.value;
+    let accountTransact = formTransact.value;
+    let accountOther = formOther.value;
+    let accountAmount = formAmount.value;
+    //console.table(formAccount.value, formTransact.value, formOther.value, formAmount.value)
+    //console.log(typeof(formAmount.value))
+    let transaction;
+    //might have to check values of optional fields against defaults
+    if (accountTransact === "balance") {
 
-  accounts.forEach(account => account.describe());
+        let transactMsg = document.querySelector('#transact_account_msg');
+        transactMsg.appendChild(document.createTextNode(bankOfTabitha.accounts[accountName].balance));
+        return;
+    }
+    else if (accountTransact === "withdraw") {
+        transaction = bankOfTabitha.accounts[accountName].withdraw(accountAmount)
+    }
+    else if (accountTransact === "deposit") {
+        transaction = bankOfTabitha.accounts[accountName].deposit(accountAmount)
+    }
+    else if (accountTransact === "transfer") {
+        let recipient = bankOfTabitha.accounts[accountOther]
+        transaction = bankOfTabitha.accounts[accountName].transfer(recipient, accountAmount)
+    } else {
+        transaction= null;
+        console.log(accountName, accountTransact, accountOther, accountAmount)
+    }
 
-  // Let's give these people a line of credit!
+    let transactMsg = document.querySelector('#transact_account_msg');
+    transactMsg.appendChild(document.createTextNode(bankOfTabitha.accounts[accountName].message));
+    event.preventDefault();
+    //console.log(transaction)
 
-  accounts.forEach(account => account.openCredit(1500));
 
-  // Now, some spending on their credit cards
-
-  Billy.useCredit(450);
-  Rosie.useCredit(175);
-  Jack.useCredit(25);
-  Jill.useCredit(1000);
-
-  //Jill tries to use their card for more shopping
-
-  Jill.useCredit(1200);
-
-  // oops, card declined!
-
-  //Let's look at the accounts again
-
-  accounts.forEach(account => account.describe());
-
-  // How can they pay off their credit cards?
-  // I think deposit could handle this but we would have to change the method to accept a second
-  // parameter: which account. <aybe in the future. For now I will add a method for
-  // payCreditCardBill()
-
-  accounts.forEach(account => account.payCreditCardBill(50));
-
-  // You can see that Jack's payment failed because it was more than their balance.
-
-  // let's close the accounts now
-
-  accounts.forEach(account => account.closeAccount());
-
-  // Ooops! can't close the account without paying your credit card bill first
-  // Pay off the debt:
-
-  accounts.forEach(account => account.payCreditCardBill(account.debt));
-
-  // close them. you'll see that the balance is first withdrawn.
-
-  accounts.forEach(account => account.closeAccount());
-
-  // last minute add of a check for account status (open, closed). messy but it works.
-
-  accounts.forEach(account => account.describe());
-  // I think that about covers it. In the future we'd add time stamps, interest rates, payment cycles, and save history to a database.
+  })
