@@ -8,40 +8,36 @@
 //  $$ |__$$ |/$$$$$$$ |$$ |  $$ |$$$$$$  \       $$ \__$$ |$$ |               $$ |/$$$$$$$ |$$ |__$$ |$$ |  $$ |/  |$$ |  $$ |/$$$$$$$ |
 //  $$    $$/ $$    $$ |$$ |  $$ |$$ | $$  |      $$    $$/ $$ |               $$ |$$    $$ |$$    $$/ $$ |  $$  $$/ $$ |  $$ |$$    $$ |
 //  $$$$$$$/   $$$$$$$/ $$/   $$/ $$/   $$/        $$$$$$/  $$/                $$/  $$$$$$$/ $$$$$$$/  $$/    $$$$/  $$/   $$/  $$$$$$$/
-//
-//
-//
-// techtonica instructions:
-// * A `name` property.
-// * A `balance` property set to 0.
-// * A `deposit` method adding the (positive or negative) value passed as an argument to the account balance.
-// * A `describe` method returning the account description.
-// * A `transfer` method with two parameters: the name of the account that will receive the transfer, and the amount of money to transfer.
-
-
-
-
-
 class Account {
-    constructor(name, balance) {
+    constructor(name, status, balance, creditLine, debt) {
         this.name = name;
-        this.isOpen = true;
+        this.isOpen = status || true;
 
 
         this.balance = balance;
-        this.creditLine = 0;
+        this.creditLine = creditLine || 0;
 
         // debt represents how much of the credit line the account is using/ owes
-        this.debt = 0;
+        this.debt = debt || 0;
 
+        //TODO messages and display have not been integrated to local storage
         // welcome message
-        this.message =(`Welcome to the Bank of Tabitha, ${this.name}!\n`);
+        this.message = (`Welcome to the Bank of Tabitha, ${this.name}!\n`) || "";
         this.display = `Accountholder: ${this.name} Balance: ${this.balance} Credit Line: ${this.creditLine}`
 
-        bankOfTabitha.accounts[this.name] = this;
-        bankOfTabitha.openAccounts += 1;
+
+        // upon creation account is added to local storage
+        this.localStore = function() {
+            localStorage.setItem(this.name, JSON.stringify(this));
+            return true
+        }
+        // not sure why I store this but hey might need it later
+        this.inStorage = this.localStore() || false;
+
         // we also want to be able to close accounts
-        this.closeAccount = function () {
+
+        // TODO isOpen is super weaksauce right now and was just a bandaid, so pay no attention to it.
+        this.closeAccount = function() {
             if (!this.isOpen) {
                 this.message = `Your account is already closed.`;
                 return false;
@@ -57,13 +53,12 @@ class Account {
                 this.withdraw(this.balance);
             }
             this.message = `Farewell from Bank of Tabitha.\n`;
-            bankOfTabitha.openAccounts -= 1;
+            this.localStore();
             this.isOpen = false;
         };
-        // this.creditLine is the max allowed to use as credit. Then we can have a method for starting credit line,
-        // credit can max out, card declined. Right now my object has no sense of time/ doesn't retain information
-        // in a database, so interest is not possible, but it would be in the future.
-        // we should also be able to increase a creditline.
+        // starting credit line,
+        // credit can max out, card declined.
+        // TODO we should also be able to increase a creditline.
         // open a line of credit if you don't have one already
         this.openCredit = function (amount) {
             if (!this.isOpen) {
@@ -73,6 +68,7 @@ class Account {
             if (!this.creditLine) {
                 this.creditLine += amount;
                 this.message = `Congrats ${this.name}! You have a credit line of ${this.creditLine}.\n`;
+                this.localStore();
                 return true;
             }
             this.message = `Hello, ${this.name}. Your account already has a credit line of ${this.creditLine}.\n`;
@@ -88,6 +84,7 @@ class Account {
             if (this.debt + amount <= this.creditLine) {
                 this.debt += amount;
                 this.message = `Purchase approved. You are using ${this.debt} of your ${this.creditLine} credit line.\n`;
+                this.localStore();
                 return true;
             }
             this.message = `Card declined.\n`;
@@ -103,14 +100,14 @@ class Account {
             if (amount <= this.debt) {
                 this.debt -= amount;
                 this.message = `Thanks for paying your bill, ${this.name}. Your new credit card balance is ${this.debt}.\n`;
+                this.localStore();
                 return true;
             }
             this.message = `Payment failed. Your balance is only ${this.debt}. Please pay that amount or less.\n`;
             return false;
         };
 
-        // My preference is to have deposit() and withdrawal() instead of combining them, so I did.
-        // Otherwise, transfers are possible even when folks have insufficient funds
+        // deposit
         this.deposit = function (amount) {
             if (!this.isOpen) {
                 this.message = `This account is closed.\n`;
@@ -119,12 +116,13 @@ class Account {
             if (this._isPositive(amount)) {
                 this.balance += amount;
                 this.message = `Deposit successful. ${this.name}, your new balance is ${this.balance}.\n`;
+                this.localStore();;
                 return true;
             }
             return false;
         };
 
-        // not explicitly part of the assignment, but important I believe
+        // withdraw
         this.withdraw = function (amount) {
             if (!this.isOpen) {
                 this.message = `This account is closed.\n`;
@@ -133,6 +131,7 @@ class Account {
             if (this._isAllowed(amount)) {
                 this.balance -= amount;
                 this.message = `Withdrawal successful. ${this.name}, your new balance is ${this.balance}.\n`;
+                this.localStore();
                 return true;
             }
             return false;
@@ -146,12 +145,14 @@ class Account {
             }
             if (this.withdraw(amount) && account.deposit(amount)) {
                 this.message = `Transfer successful. ${amount} has been transferred from ${this.name} to ${account.name}.\n`;
+                this.localStore();
                 return true;
             }
             return false;
         };
 
-        // these methods help me keep illegal actions from taking place. Not 100% neccesary, but perhaps extensible if I create a more complex system
+        // these methods keep illegal actions from taking place.
+        // Not 100% neccesary, but perhaps extensible
         this._isPositive = function (amount) {
             const isPositive = amount > 0;
             if (!isPositive) {
@@ -174,80 +175,61 @@ class Account {
             return true;
         };
 
-        // Get some info create the account
+        // Get some info about the account
         this.describe = function () {
             if (!this.isOpen) {
-                this.message = `This account is closed.\n`;
-                return false;
+                return `This account is closed.\n`;
             }
-            this.message = `${this.name}\'s account:\nBalance: ${this.balance}\nCreditline: ${this.creditLine}\nCredit Card Balance: ${this.debt}\n`;
+            return `${this.name}\'s account:\nBalance: ${this.balance}\nCreditline: ${this.creditLine}\nCredit Card Balance: ${this.debt}\n`;
 
         };
     }
 };
 
-class Bank {
-    constructor(name) {
-        this.name = name;
-        this.accounts = {};
-        this.openAccounts = 0;
-    }
-}
 
-const bankOfTabitha = new Bank("bankOfTabitha");
+let Tabitha = new Account('Tabitha', true, 1000, 500, 0 );
+let Wheatley = new Account("Wheatley", true, 1000, 550, 0);
+let Kevin = new Account("Kevin", true, 1000, 550, 0);
 
-//testing
-
-const Tabitha = new Account('Tabitha', 1000);
-const Tristan = new Account('Tristan', 1000);
-const Anatoly = new Account('Anatoly', 1000);
-const Georgiana = new Account('Georgiana', 1000);
-const Romneya = new Account('Romneya', 1000);
-const Arlo = new Account('Arlo', 1000);
-// console.log(bankOfTabitha.accounts)
-// console.log(bankOfTabitha.openAccounts)
-
-
-
-//this is what the html should look like
-/* <div class="list_accounts">
-      <p id="display_account_msg"><i class="fas fa-comments-dollar"></i> placeholder</p>
-      <p id="display_account_name"><i class="fas fa-money-check-alt"></i> placeholder</p>
-      <p id=display_account_balance><i class="fas fa-balance-scale-right"></i> placeholder</p>
-    </div> */
 //DISPLAY ACCOUNTS
 
-// bankOfTabitha.accounts.forEach(function(account) {
-//     display = document.querySelector('#display_ul');
-//     const li = document.createElement('li');
-//     li.className = 'account_name'
-//     li.appendChild(document.createTextNode(account.display));
-//     display.appendChild(li);
+        function allStorage() {
+            let values = [],
+                keys = Object.keys(localStorage),
+                i = keys.length;
+            while ( i-- ) {
+                values.push(JSON.parse((localStorage.getItem(keys[i]))));
+            }
+            return values;
+        }
 
-// })
+        let listAccounts = []
+        for (let item of allStorage()) {
+            listAccounts.push(revivifyAccount(item['name']))
+        }
 
-    for (let value in bankOfTabitha.accounts) {
-        display = document.querySelector('#display_ul');
+
+        listAccounts.map(account => {
+        let description = account.describe()
+        console.log(description)
+        let display = document.querySelector('#display_ul');
         const li = document.createElement('li');
-        li.appendChild(document.createTextNode(value));
-        display.appendChild(li);
+        li.appendChild(document.createTextNode(description));
+        display.appendChild(li)
+        })
 
-    }
+
+
 
 let createButton = document.querySelector('#create_button');
 createButton.addEventListener('click', function(event) {
     let form = document.querySelector('#new_account_name')
     let accountName = form.value;
-    //console.log(accountName)
     const name = new Account(accountName);
-    //console.log(name)
     let messageP = document.querySelector('#create_account_msg');
     let msg = document.createElement('span')
-
     messageP.appendChild(document.createTextNode(name.message));
     event.preventDefault();
-
-
   })
 
 // TRANSACTIONS
@@ -263,34 +245,44 @@ transactButton.addEventListener('click', function(event) {
     let accountTransact = formTransact.value;
     let accountOther = formOther.value;
     let accountAmount = formAmount.value;
-    //console.table(formAccount.value, formTransact.value, formOther.value, formAmount.value)
-    //console.log(typeof(formAmount.value))
     let transaction;
-    //might have to check values of optional fields against defaults
     if (accountTransact === "balance") {
 
         let transactMsg = document.querySelector('#transact_account_msg');
-        transactMsg.appendChild(document.createTextNode(bankOfTabitha.accounts[accountName].balance));
+        transactMsg.appendChild(document.createTextNode(revivifyAccount(accountName).balance));
         return;
     }
     else if (accountTransact === "withdraw") {
-        transaction = bankOfTabitha.accounts[accountName].withdraw(accountAmount)
+        transaction = revivifyAccount(accountName).withdraw(accountAmount)
     }
     else if (accountTransact === "deposit") {
-        transaction = bankOfTabitha.accounts[accountName].deposit(accountAmount)
+        transaction = revivifyAccount(accountName).deposit(accountAmount)
     }
     else if (accountTransact === "transfer") {
-        let recipient = bankOfTabitha.accounts[accountOther]
-        transaction = bankOfTabitha.accounts[accountName].transfer(recipient, accountAmount)
+        let recipient = revivifyAccount(accountOther)
+        transaction = revivifyAccount(accountName).transfer(recipient, accountAmount)
     } else {
         transaction= null;
         console.log(accountName, accountTransact, accountOther, accountAmount)
     }
-
     let transactMsg = document.querySelector('#transact_account_msg');
-    transactMsg.appendChild(document.createTextNode(bankOfTabitha.accounts[accountName].message));
+    transactMsg.appendChild(document.createTextNode(revivifyAccount(accountName).message));
     event.preventDefault();
-    //console.log(transaction)
-
-
   })
+
+  // localStorage abuse
+
+function revivifyAccount(accountName) {
+    let corpse = JSON.parse(localStorage.getItem(accountName));
+    let account = corpse.name
+    let accountStatus = corpse.isOpen
+    let accountBalance = corpse.balance;
+    let accountCreditLine = corpse.creditLine;
+    let accountDebt = corpse.debt;
+    return new Account(account, accountStatus, accountBalance, accountCreditLine, accountDebt)
+}
+
+function localStore(account) {
+    localStorage.setItem(account.name, JSON.stringify(account));
+
+}
