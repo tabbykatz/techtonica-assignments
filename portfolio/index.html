@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Tabitha O'Melay: Software Engineer</title>
+
+  <!-- favicon -->
+  <link href="images/favicon.ico" rel="icon">
+
+  <!-- google font Courier Prime/ Sans-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- nifty things -->
+
+  <!-- aos, animate on scroll -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!---- bootstrappy -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+  <!-- box icons -->
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+  <!-- light box -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+  <!-- mine -->
+  <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- mobile nav bootstrap -->
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+  <!-- header -->
+  <header id="header" class="d-flex flex-column justify-content-center">
+  <!-- .nav-menu -->
+    <nav id="navbar" class="navbar nav-menu">
+      <ul>
+        <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
+        <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
+        <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
+        <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- typer -->
+  <section id="hero" class="d-flex flex-column justify-content-center">
+    <div class="container" data-aos="zoom-in" data-aos-delay="100">
+      <love>Hi, I'm Tabitha and I love <span class="typed" data-typed-items="Python,Javascript,bit manipulation,solving problems,Vim,APIs,data,building software,Berkeley,reading the docs"></span></love></h1>
+      <div class="social-links">
+        <a href="https://twitter.com/tabby__katz" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="https://www.instagram.com/tabby_katz/" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/tabithaomelay/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+
+    <!-- about -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>About</h2>
+          <h3>Self-taught software engineer.</h3>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4">
+            <img src="images/me.jpg" class="img-fluid" alt="Image of Tabitha O'Melay">
+          </div>
+          <div class="col-lg-8 pt-4 pt-lg-0 content">
+
+            <p>I'm a fullstack dev with a strong foundation in C, Javascript, and Python.
+              I am comfortable on the command line and have diverse DevOps experience.
+            Recently I've been finding my joy while: training with Techtonica, building my communication skills, and studying software architecture.</p>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class="bx bx-chevrons-right"></i> <strong>&hearts;:</strong> <span>Full Stack</span></li>
+                  <li><i class="bx bx-chevrons-right"></i> <strong>Blog:</strong> <span><a target="_blank" rel="noopener noreferrer" href="https://www.tabbykatz.com/">tabbykatz.com</a></span></li>
+                  <li><i class="bx bx-chevrons-right"></i> <strong>City:</strong> <span>San Francisco || Remote</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- portfolio peek -->
+    <section id="portfolio" class="portfolio section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Portfolio</h2>
+          <p>I've made a bunch of nifty things since I started programming in 2020. Check them out!</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+            <ul id="portfolio-filters">
+             <li data-filter="*" class="filter-active">All</li>
+             <li data-filter=".filter-solo">Solo</li>
+             <li data-filter=".filter-collab">Collaborative</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+          <!-- begin bank -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-solo">
+            <div class="portfolio-wrap">
+              <img src="images/banking.jpg" class="img-fluid" alt="Banking">
+              <div class="portfolio-info">
+                <h4>Bank of Tabitha</h4>
+                <p>Vanilla Js faux banking</p>
+                <div class="portfolio-links">
+                  <a href="https://github.com/tabbykatz/banking"  target="_blank" rel="noopener noreferrer" title="Check me out on Gitgub!"><i class="bx bx-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end bank -->
+          <!-- begin monty -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-collab">
+            <div class="portfolio-wrap">
+              <img src="images/monty.jpg" class="img-fluid" alt="Monty Interpreter in C">
+              <div class="portfolio-info">
+                <h4>MONTY</h4>
+                <p>An interpreter for montylang written in C</p>
+                <div class="portfolio-links">
+                  <a href="https://github.com/tabbykatz/monty"  target="_blank" rel="noopener noreferrer" title="Check me out on Gitgub!"><i class="bx bx-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end monty -->
+          <!-- begin auTickets -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-solo">
+            <div class="portfolio-wrap">
+              <img src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80" class="img-fluid" alt="Golden Tickets">
+              <div class="portfolio-info">
+                <h4>Golden Tickets</h4>
+                <p>Python IT tool with GitHub & Google Cal apis</p>
+                <div class="portfolio-links">
+                  <a href="https://github.com/tabbykatz/au_tickets"  target="_blank" rel="noopener noreferrer" title="Check me out on Gitgub!"><i class="bx bx-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end auTickets -->
+          <!-- begin shell -->
+          <div class="col-lg-4 col-md-6 portfolio-item filter-collab">
+            <div class="portfolio-wrap">
+              <img src="images/shell.jpg" class="img-fluid" alt="Shell">
+              <div class="portfolio-info">
+                <h4>Ship$</h4>
+                <p>A simple shell written in C</p>
+                <div class="portfolio-links">
+                  <a href="https://github.com/zacwoll/simple_shell"  target="_blank" rel="noopener noreferrer" title="Check me out on Gitgub!"><i class="bx bx-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end shell -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- contact -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Get in touch</h2>
+        </div>
+        <div class="row mt-1">
+          <div class="col-lg-4">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p>San Francisco || Remote</p>
+              </div>
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>tomelay@gmail.com</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 mt-5 mt-lg-0">
+<!-- TODO remove form -->
+            <form action="" method="" role="form" class="email-form">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="firstName" placeholder="First Name" required pattern="(.|\s)*\S(.|\s)*" onsubmit=event.preventDefault()>
+                </div>
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="lastName" placeholder="Last Name" required pattern="(.|\s)*\S(.|\s)*" onsubmit=event.preventDefault()>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" onsubmit=event.preventDefault()>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="telNo" class="form-control" name="telNo" id="phone" placeholder="Tel: xxx-xxx-xxxx" optional pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" onsubmit=event.preventDefault()>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <input type="address" class="form-control" name="address" id="address1" placeholder="Address" optional pattern="(.|\s)*\S(.|\s)*" onsubmit=event.preventDefault()>
+              </div>
+              <div class="row">
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <input type="city" class="form-control" name="city" id="city" placeholder="City" optional pattern="(.|\s)*\S(.|\s)*" onsubmit=event.preventDefault()>
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <input type="text" class="form-control" name="zip" id="zip" placeholder="Zip || Zip+4" optional pattern="^[0-9]{5}(?:-[0-9]{4})?$" onsubmit=event.preventDefault()>
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <select type="state" class="form-control" name="state" id="state" placeholder="State" optional onsubmit=event.preventDefault()>
+                <option value="AL">Alabama</option>
+          <option value="AK">Alaska</option>
+          <option value="AZ">Arizona</option>
+          <option value="AR">Arkansas</option>
+          <option value="CA">California</option>
+          <option value="CO">Colorado</option>
+          <option value="CT">Connecticut</option>
+          <option value="DE">Delaware</option>
+          <option value="DC">District Of Columbia</option>
+          <option value="FL">Florida</option>
+          <option value="GA">Georgia</option>
+          <option value="HI">Hawaii</option>
+          <option value="ID">Idaho</option>
+          <option value="IL">Illinois</option>
+          <option value="IN">Indiana</option>
+          <option value="IA">Iowa</option>
+          <option value="KS">Kansas</option>
+          <option value="KY">Kentucky</option>
+          <option value="LA">Louisiana</option>
+          <option value="ME">Maine</option>
+          <option value="MD">Maryland</option>
+          <option value="MA">Massachusetts</option>
+          <option value="MI">Michigan</option>
+          <option value="MN">Minnesota</option>
+          <option value="MS">Mississippi</option>
+          <option value="MO">Missouri</option>
+          <option value="MT">Montana</option>
+          <option value="NE">Nebraska</option>
+          <option value="NV">Nevada</option>
+          <option value="NH">New Hampshire</option>
+          <option value="NJ">New Jersey</option>
+          <option value="NM">New Mexico</option>
+          <option value="NY">New York</option>
+          <option value="NC">North Carolina</option>
+          <option value="ND">North Dakota</option>
+          <option value="OH">Ohio</option>
+          <option value="OK">Oklahoma</option>
+          <option value="OR">Oregon</option>
+          <option value="PA">Pennsylvania</option>
+          <option value="RI">Rhode Island</option>
+          <option value="SC">South Carolina</option>
+          <option value="SD">South Dakota</option>
+          <option value="TN">Tennessee</option>
+          <option value="TX">Texas</option>
+          <option value="UT">Utah</option>
+          <option value="VT">Vermont</option>
+          <option value="VA">Virginia</option>
+          <option value="WA">Washington</option>
+          <option value="WV">West Virginia</option>
+          <option value="WI">Wisconsin</option>
+          <option value="WY">Wyoming</option>
+              </select>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Send me a message?" id="message" optional pattern="(.|\s)*\S(.|\s)*" onsubmit=event.preventDefault()></textarea>
+              </div>
+              <div class="my-3">
+                <div class="display"></div>
+              </div>
+              <div class="text-center"><button id="submit" type="submit">Send Message</button></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- footer-->
+  <footer id="footer">
+    <div class="container">
+      <h5>&hearts; Tabitha O'Melay &hearts;</h5>
+      <div class="social-links">
+        <a href="https://twitter.com/tabby__katz" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="https://www.instagram.com/tabby_katz/" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/tabithaomelay/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="loading"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- nifty js scripts i might use -->
+
+  <!-- animate on scroll -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  <!-- lightbox -->
+  <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+
+  <!-- isotope layouts -->
+  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+
+  <!-- typer! -->
+
+  <script src="	https://unpkg.com/typed.js@2.0.8/lib/typed.js"></script>
+
+  <!-- my js -->
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
