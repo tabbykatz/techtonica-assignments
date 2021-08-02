@@ -209,31 +209,32 @@
             <form action="" method="" role="form" class="email-form">
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="firstName" placeholder="First Name" required pattern="(.|\s)*\S(.|\s)*" onsubmit=event.preventDefault()>
+                  <input type="text" name="name" class="form-control" id="firstName"
+                    placeholder="First Name" required pattern="(.|\s)*\S(.|\s)*">
                 </div>
                 <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="lastName" placeholder="Last Name" required pattern="(.|\s)*\S(.|\s)*" onsubmit=event.preventDefault()>
+                  <input type="text" name="name" class="form-control" id="lastName" placeholder="Last Name" required pattern="(.|\s)*\S(.|\s)*">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" onsubmit=event.preventDefault()>
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="telNo" class="form-control" name="telNo" id="phone" placeholder="Tel: xxx-xxx-xxxx" optional pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" onsubmit=event.preventDefault()>
+                  <input type="telNo" class="form-control" name="telNo" id="phone" placeholder="Tel: xxx-xxx-xxxx" optional pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
                 </div>
               </div>
               <div class="form-group mt-3">
-                <input type="address" class="form-control" name="address" id="address1" placeholder="Address" optional pattern="(.|\s)*\S(.|\s)*" onsubmit=event.preventDefault()>
+                <input type="address" class="form-control" name="address" id="address1" placeholder="Address" optional pattern="(.|\s)*\S(.|\s)*">
               </div>
               <div class="row">
               <div class="col-md-6 form-group mt-3 mt-md-0">
-                <input type="city" class="form-control" name="city" id="city" placeholder="City" optional pattern="(.|\s)*\S(.|\s)*" onsubmit=event.preventDefault()>
+                <input type="city" class="form-control" name="city" id="city" placeholder="City" optional pattern="(.|\s)*\S(.|\s)*">
               </div>
               <div class="col-md-6 form-group mt-3 mt-md-0">
-                <input type="text" class="form-control" name="zip" id="zip" placeholder="Zip || Zip+4" optional pattern="^[0-9]{5}(?:-[0-9]{4})?$" onsubmit=event.preventDefault()>
+                <input type="text" class="form-control" name="zip" id="zip" placeholder="Zip || Zip+4" optional pattern="^[0-9]{5}(?:-[0-9]{4})?$">
               </div>
             </div>
             <div class="form-group mt-3">
-              <select type="state" class="form-control" name="state" id="state" placeholder="State" optional onsubmit=event.preventDefault()>
+              <select type="state" class="form-control" name="state" id="state" placeholder="State" optional>
                 <option value="AL">Alabama</option>
           <option value="AK">Alaska</option>
           <option value="AZ">Arizona</option>
@@ -287,12 +288,12 @@
           <option value="WY">Wyoming</option>
               </select>
               <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Send me a message?" id="message" optional pattern="(.|\s)*\S(.|\s)*" onsubmit=event.preventDefault()></textarea>
+                <textarea class="form-control" name="message" rows="5" placeholder="Send me a message?" id="message" optional></textarea>
               </div>
               <div class="my-3">
                 <div class="display"></div>
               </div>
-              <div class="text-center"><button id="submit" type="submit">Send Message</button></div>
+              <div class="text-center"><button class='btn btn-dark' id="submit" type="button" onsubmit=event.preventDefault()>Send Message</button></div>
             </form>
           </div>
         </div>
