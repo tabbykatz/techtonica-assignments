@@ -28,16 +28,23 @@
 
   // do the flipping
 function flipper() {
-
   let flipResult = Math.random();
   console.log(flipResult);
   let coin = select('#coin');
+  coin.className = "";
   if (flipResult < 0.5) {
-    coin.className = "";
     coin.className = "flipHead";
   } else {
-    coin.className = "";
     coin.className = "flipTail";
   }
+  reset_animation();
+}
+
+// reset the animation of the coin in case of repeat flips
+function reset_animation() {
+  let coin = select('#coin');
+  coin.style.animation = 'none';
+  coin.offsetHeight; /* trigger reflow */
+  coin.style.animation = null;
 }
 })();
