@@ -28,11 +28,16 @@
 
   // do the flipping
 function flipper() {
+
   let flipResult = Math.random();
+  console.log(flipResult);
+  let coin = select('#coin');
   if (flipResult < 0.5) {
-    select('#coin').className = ("flipHead");
+    coin.className = "";
+    coin.className = "flipHead";
   } else {
-    select('#coin').className = ("flipTail");
+    coin.className = "";
+    coin.className = "flipTail";
   }
 }
 })();
