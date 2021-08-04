@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+:root {
+  --display-font: 'Righteous', cursive;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-link: #399a56;
+}
+
+body {
+  font-family: var(--display-font);
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+h1 {
+  text-align: center;
+}
+#coin {
+  position: relative;
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  transition: transform 1s ease-in;
+  transform-style: preserve-3d;
+}
+.side {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: absolute;
+  backface-visibility: hidden;
+}
+.head {
+  background: url(heads.png);
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  z-index: 10;
+}
+.tail {
+  background: url(tails.png);
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  transform: rotateX(-180deg);
+}
+
+.flipHead {
+  animation: resultHead 2s ease-out forwards;
+}
+.flipTail {
+  animation: resultTail 2s ease-out forwards;
+}
+
+@keyframes resultHead {
+  from {
+    transform: rotateX(0);
+  }
+  to {
+    transform: rotateX(1800deg);
+  }
+}
+
+@keyframes resultTail {
+  from {
+    transform: rotateX(0);
+  }
+  to {
+    transform: rotateX(1980deg);
+  }
+}
