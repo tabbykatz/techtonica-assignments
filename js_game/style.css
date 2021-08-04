@@ -45,13 +45,13 @@ h1 {
 }
 
 .flipHead {
-  animation: resultHead 2s ease-out forwards;
+  animation: resultHeads 2s ease-out forwards;
 }
 .flipTail {
-  animation: resultTail 2s ease-out forwards;
+  animation: resultTails 2s ease-out forwards;
 }
 
-@keyframes resultHead {
+@keyframes resultHeads {
   from {
     transform: rotateX(0);
   }
@@ -60,7 +60,7 @@ h1 {
   }
 }
 
-@keyframes resultTail {
+@keyframes resultTails {
   from {
     transform: rotateX(0);
   }
