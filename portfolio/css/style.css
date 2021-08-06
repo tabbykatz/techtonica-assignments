@@ -615,49 +615,6 @@ section {
 .contact .email .form-group {
   padding-bottom: 8px;
 }
-
-.contact .email .error-message {
-  display: none;
-  color: var(--color-white);;
-  background: var(--color-link);
-  text-align: left;
-  padding: 15px;
-  font-weight: 600;
-}
-
-.contact .email .error-message br + br {
-  margin-top: 25px;
-}
-
-.contact .email .sent-message {
-  display: none;
-  color: var(--color-white);;
-  background: var(--color-hover);
-  text-align: center;
-  padding: 15px;
-  font-weight: 600;
-}
-
-.contact .email .loading {
-  display: none;
-  background: var(--color-white);;
-  text-align: center;
-  padding: 15px;
-}
-
-.contact .email .loading:before {
-  content: "";
-  display: inline-block;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  margin: 0 10px -6px 0;
-  border: 3px solid var(--color-hover);
-  border-top-color: var(--color-off-white);
-  -webkit-animation: animate-loading 1s linear infinite;
-  animation: animate-loading 1s linear infinite;
-}
-
 .contact .email input, .contact .email textarea {
   border-radius: 4px;
   box-shadow: none;
@@ -672,7 +629,7 @@ section {
   padding: 10px 12px;
 }
 
-.contact .email button[type="submit"] {
+#submit{
   background: var(--color-link);
   border: 0;
   padding: 10px 35px;
@@ -681,7 +638,7 @@ section {
   border-radius: 50px;
 }
 
-.contact .email button[type="submit"]:hover {
+#submit:hover {
   background: var(--color-link);
 }
 
