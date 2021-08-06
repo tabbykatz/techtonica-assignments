@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  // It's dangerous to go alone, take these
+  // It's dangerous to go alone, take these (helper functions)
 
   const select = (el, all = false) => {
     el = el.trim()
