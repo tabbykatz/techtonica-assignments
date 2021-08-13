@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+@font-face {
+  font-family: 'Data Control';
+  src: local('Data Control'), url(./fonts/data-latin.ttf) format('truetype');
+}
+
+body {
+  min-height: 100%;
+  
+}
+.App {
+  font-size: 30px;
+  font-family: 'Data Control', sans-serif;
+  align-items: center;
+}
+
+button {
+  font-family: 'Data Control', sans-serif;
+  font-size: 25px;
+  border: 2px solid;
+  background-color: #fff;
+}
+
+.timetravel:hover {
+  color: #18b3f5;
+}
+
+.timetravel {
+  font-family: 'Data Control', sans-serif;;
+  font-size: 25px;
+  border: none;
+  background-color: #fff;
+
+}
+
+li {
+  list-style-type: none;
+}
+
+p {
+  font-family: 'Data Control', sans-serif;
+  font-size: 30px;
+}
+
+h1 {
+  font-family: 'Data Control', sans-serif;
+  text-align: center;
+  font-size: 40px;
+}
