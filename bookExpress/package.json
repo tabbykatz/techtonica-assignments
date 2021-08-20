@@ -1,0 +1,21 @@
+{
+  "name": "bookExpress",
+  "version": "1.0.0",
+  "description": "Sample",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["express", "node", "sqllite", "api"],
+  "author": "Tabitha O'Melay",
+  "license": "unlicense",
+  "dependencies": {
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "sqlite3": "^4.1.0"
+  },
+   "engines": {
+    "node": "14.x"
+  }
+}
