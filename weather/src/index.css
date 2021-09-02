@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=ABeeZee&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "ABeeZee", sand-serif;
+}
+
+main {
+  background-color: #adeaea;
+  min-height: 100vh;
+  padding: 25px;
+}
+
+.search-box {
+  width: 100%;
+  margin: 25px 0 75px;
+}
+
+.search-box .search-bar {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 16px 16px 16px 16px;
+  margin-top: 25px;
+  box-shadow: 0px 5px rgba(0, 0, 0, 0.2);
+  color: #313131;
+  font-size: 1.2em;
+  transition: 0.4s ease;
+}
+
+.search-box .search-bar:focus {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+ul {
+  display: flexbox;
+  margin: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+li .temp {
+  font-size: 2em;
+}
+
+li .date {
+  font-size: 1em;
+}
+
+li .description {
+  font-size: 1.5em;
+}
+
+li .icon {
+  display: flex;
+}
+
+li {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px;
+  justify-content: space-between;
+}
